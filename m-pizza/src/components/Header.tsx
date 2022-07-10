@@ -7,7 +7,7 @@ import { selectCart } from '../redux/slices/cartSlice';
 function Header() {
   const { items, totalPrice } = useSelector(selectCart);
 
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
   return (
     <div className="header">
@@ -23,7 +23,7 @@ function Header() {
         </Link>
         <Search />
         <div className="header__cart">
-          <Link to="card" className="button button--cart">
+          <Link to="/card" className="button button--cart">
             <span>{totalPrice} ₽</span>
             <div className="button__delimiter"></div>
             <svg

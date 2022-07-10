@@ -1,10 +1,21 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
+import { Link } from 'react-router-dom';
+import { addItem, CartItem, selectCartItemById } from '../../redux/slices/cartSlice';
 
-function PizzaCard({ data }) {
+type DataProps = {
+  id: string;
+  title: string;
+  price: string;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+  rating: number;
+};
+
+const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
-  const cartItem = useSelector(selectCartItemById(data.id));
+  const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
   const typeNames = ['тонкое', 'традиционное'];
@@ -12,13 +23,14 @@ function PizzaCard({ data }) {
   const addedCount = cartItem ? cartItem.count : 0;
 
   const onClockAdd = () => {
-    const item = {
-      id: data.id,
-      title: data.title,
-      price: data.price,
-      imageUrl: data.imageUrl,
+    const item: CartItem = {
+      id: id,
+      title: title,
+      price: price,
+      imageUrl: imageUrl,
       type: typeNames[activeType],
-      size: data.sizes[activeSize],
+      size: sizes[activeSize],
+      count: 0,
     };
 
     dispatch(addItem(item));
@@ -27,11 +39,13 @@ function PizzaCard({ data }) {
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
-        <img className="pizza-block__image" src={data.imageUrl} alt="Pizza" />
-        <h4 className="pizza-block__title">{data.title}</h4>
+        <Link key={id} to={`/pizza/${id}`}>
+          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+          <h4 className="pizza-block__title">{title}</h4>
+        </Link>
         <div className="pizza-block__selector">
           <ul>
-            {data.types.map((type) => (
+            {types.map((type) => (
               <li
                 key={type}
                 onClick={() => setActiveType(type)}
@@ -41,7 +55,7 @@ function PizzaCard({ data }) {
             ))}
           </ul>
           <ul>
-            {data.sizes.map((size, i) => (
+            {sizes.map((size, i) => (
               <li
                 key={size}
                 onClick={() => setActiveSize(i)}
@@ -52,7 +66,7 @@ function PizzaCard({ data }) {
           </ul>
         </div>
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price">от {data.price} ₽</div>
+          <div className="pizza-block__price">от {price} ₽</div>
           <button className="button button--outline button--add" onClick={onClockAdd}>
             <svg
               width="12"
@@ -72,6 +86,6 @@ function PizzaCard({ data }) {
       </div>
     </div>
   );
-}
+};
 
-export default PizzaCard;
+export default PizzaBlock;
