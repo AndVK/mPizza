@@ -28,9 +28,9 @@ const Home: React.FC = () => {
 
   const sortType = sort.sortProperty;
 
-  const onClickCategory = (id: number) => {
+  const onClickCategory = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
@@ -55,7 +55,6 @@ const Home: React.FC = () => {
         categoryId,
         currentPage,
       });
-
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
@@ -93,15 +92,15 @@ const Home: React.FC = () => {
     isSearch.current = false;
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  const pizzass = items.map((obj: any) => <PizzaBlock {...obj} />);
+  const pizzass = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
 
   const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onChangeCategory={(i: any) => onClickCategory(i)} />
-        <Sort />
+        <Categories value={categoryId} onChangeCategory={onClickCategory} />
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (

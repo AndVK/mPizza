@@ -30,7 +30,7 @@ const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, sizes, ty
       imageUrl: imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
-      count: 0,
+      count: 0, // дорефакторить
     };
 
     dispatch(addItem(item));
