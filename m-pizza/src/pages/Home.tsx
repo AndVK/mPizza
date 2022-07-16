@@ -1,16 +1,15 @@
 import React from 'react';
+import qs from 'qs';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import qs from 'qs';
-import Categories from '../components/Categories';
-import Pagination from '../components/Pagination';
-import PizzaBlock from '../components/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
-import Sort, { sortList } from '../components/Sort';
-import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filter/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizza/pizzasSlice';
+
+import { sortList } from '../components/Sort';
+import { PizzaBlock, Skeleton, Pagination, Categories, Sort } from '../components';
+
 import { useAppDispatch } from '../redux/store';
 import { selectFilter } from '../redux/slices/filter/selects';
+import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filter/filterSlice';
+import { fetchPizzas } from '../redux/slices/pizza/pizzasSlice';
 import { selectPizzaData } from '../redux/slices/pizza/selects';
 import { SearchPizzaParams } from '../redux/slices/pizza/types';
 
@@ -100,7 +99,7 @@ const Home: React.FC = () => {
         <Categories value={categoryId} onChangeCategory={onClickCategory} />
         <Sort value={sort} />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
+      <h2 className="content__title">All pizzas</h2>
       {status === 'error' ? (
         <div className="content__error-info">
           <h2>Произошла ошибка. Не удалось получить пиццы. Попробуйте повторить попытку позже</h2>
@@ -108,7 +107,6 @@ const Home: React.FC = () => {
       ) : (
         <div className="content__items">{status === 'loading' ? skeletons : pizzass}</div>
       )}
-
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );

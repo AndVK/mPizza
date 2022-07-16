@@ -1,11 +1,11 @@
-import logoPizza from '../assets/img/pizza-logo.svg';
-import { Link } from 'react-router-dom';
-import Search from './Search';
-import { useSelector } from 'react-redux';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { selectCart } from '../redux/slices/cart/selects';
+import { Search } from './';
+import logoPizza from '../assets/img/pizza-logo.svg';
 
-function Header() {
+export const Header = () => {
   const { items, totalPrice } = useSelector(selectCart);
   const isMounted = React.useRef(false);
 
@@ -27,7 +27,7 @@ function Header() {
             <img width="38" src={logoPizza} alt="Pizza logo" />
             <div>
               <h1>MPizza</h1>
-              <p>the most delicious pizza in the universe</p>
+              <p>The most delicious pizza in the universe</p>
             </div>
           </div>
         </Link>
@@ -70,6 +70,4 @@ function Header() {
       </div>
     </div>
   );
-}
-
-export default Header;
+};

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 interface PizzaState {
   imageUrl: string;
@@ -35,6 +35,11 @@ const FullPizza: React.FC = () => {
       <img src={data.imageUrl} alt={data.title} />
       <h2>{data.title}</h2>
       <h4>{data.price} рублей</h4>
+      <Link to="/">
+        <button className="button button--outline button--add">
+          <span>Назад</span>
+        </button>
+      </Link>
     </div>
   );
 };

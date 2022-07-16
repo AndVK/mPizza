@@ -15,7 +15,7 @@ type DataProps = {
   rating: number;
 };
 
-const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, sizes, types }) => {
+export const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = React.useState(0);
@@ -89,5 +89,3 @@ const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, sizes, ty
     </div>
   );
 };
-
-export default PizzaBlock;
