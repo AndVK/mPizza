@@ -10,7 +10,7 @@ export const NotFoundBlock: React.FC = () => {
         Not found page
       </h1>
       <p className={styles.description}>
-        К сожалению данная страница отсутствует в нашем интернет магазине
+        Sorry, this page is not available in our online store.
       </p>
     </div>
   );

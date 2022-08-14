@@ -12,6 +12,7 @@ export const fetchPizzas = createAsyncThunk<Pizza[], SearchPizzaParams>( // 2 т
     return data;
   },
 );
+
 const initialState: pizzaSliceState = {
   items: [],
   status: Status.LOADING,

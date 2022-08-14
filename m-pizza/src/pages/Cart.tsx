@@ -107,11 +107,11 @@ const Cart: React.FC = () => {
           <div className="cart__bottom-details">
             <span>
               {' '}
-              Total pizzas: <b>{totalCount} шт.</b>{' '}
+              Total pizzas: <b>{totalCount} pcs </b>{' '}
             </span>
             <span>
               {' '}
-              Order price: <b>{totalPrice} ₽</b>{' '}
+              Order price: <b>{totalPrice.toFixed(1)} $</b>{' '}
             </span>
           </div>
           <div className="cart__bottom-buttons">

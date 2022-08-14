@@ -34,7 +34,7 @@ export const Header = () => {
         <Search />
         <div className="header__cart">
           <Link to="/card" className="button button--cart">
-            <span>{totalPrice} ₽</span>
+            <span>{totalPrice.toFixed(1)} $</span>
             <div className="button__delimiter"></div>
             <svg
               width="18"

@@ -20,7 +20,7 @@ export const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, si
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
-  const typeNames = ['тонкое', 'традиционное'];
+  const typeNames = ['thin', 'traditional'];
 
   const addedCount = cartItem ? cartItem.count : 0;
 
@@ -32,7 +32,7 @@ export const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, si
       imageUrl: imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
-      count: 0, // дорефакторить
+      count: 0,
     };
 
     dispatch(addItem(item));
@@ -62,13 +62,13 @@ export const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, si
                 key={size}
                 onClick={() => setActiveSize(i)}
                 className={activeSize === i ? 'active' : ''}>
-                {size} см.
+                {size} cm.
               </li>
             ))}
           </ul>
         </div>
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price">от {price} ₽</div>
+          <div className="pizza-block__price">from {price} $</div>
           <button className="button button--outline button--add" onClick={onClockAdd}>
             <svg
               width="12"
@@ -81,7 +81,7 @@ export const PizzaBlock: React.FC<DataProps> = ({ id, title, price, imageUrl, si
                 fill="white"
               />
             </svg>
-            <span>Добавить</span>
+            <span>Add</span>
             {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>

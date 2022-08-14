@@ -121,6 +121,12 @@ body {
       margin: 0;
     }
   }
+
+  &--fullpizza {
+    display: flex;
+    width: $container-width;
+    margin: 0 auto;
+  }
 }
 
 .cart {

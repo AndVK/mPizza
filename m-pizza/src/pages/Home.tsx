@@ -57,22 +57,22 @@ const Home: React.FC = () => {
   }, [categoryId, sortType, searchValue, currentPage, navigate, sort.sortProperty]); // проверить необходимость включения в массив navigate, sort.sortProperty
 
   // Если был первый рендер, то проверяем URL-параметры и сохраняем в редуксе
-  // React.useEffect(() => {
-  //   if (window.location.search) {
-  //     const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams;
-  //     const sort = sortList.find((obj) => obj.sortProperty === params.sortBy);
+  React.useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams;
+      const sort = sortList.find((obj) => obj.sortProperty === params.sortBy);
 
-  //     dispatch(
-  //       // @ts-ignore
-  //       setFilters({
-  //         ...params,
-  //         sort: sort || sortList[0],
-  //       }),
-  //     );
+      dispatch(
+        // @ts-ignore
+        setFilters({
+          ...params,
+          sort: sort || sortList[0],
+        }),
+      );
 
-  //     isSearch.current = true;
-  //   }
-  // }, [dispatch]);
+      isSearch.current = true;
+    }
+  }, [dispatch]);
 
   // Если был первый рендер, то запрашиваем пиццы
   React.useEffect(() => {
